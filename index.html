@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Cherry Blossoms in Central Park</title>
+  <style>
+    body {
+      background-color: #ffe4ec;
+      text-align: center;
+      font-family: Georgia, serif;
+    }
+
+    h1 {
+      color: #a0305a;
+      font-size: 36px;
+      margin-top: 40px;
+    }
+
+    p {
+      color: #7a3a4a;
+      font-size: 18px;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Cherry Blossoms in Central Park</h1>
+  <p>By Jiayi Li</p>
+  <p>Every spring, Central Park fills with pink cherry blossoms. This is my favorite moment in New York City.</p>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script>
+    function setup() {
+      createCanvas(600, 400);
+    }
+
+    function draw() {
+      background(255, 228, 236);
+
+      for (var i = 0; i < 5; i++) {
+        fill(255, 182, 210);
+        noStroke();
+        ellipse(random(width), random(height), 12, 8);
+      }
+    }
+  </script>
+
+</body>
+</html>
