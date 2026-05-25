@@ -1,51 +1,225 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Cherry Blossoms in Central Park</title>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      background-color: #ffe4ec;
-      text-align: center;
+      background-color: #fff8f9;
       font-family: Georgia, serif;
+      color: #3a2a2a;
     }
 
-    h1 {
-      color: #a0305a;
-      font-size: 36px;
-      margin-top: 40px;
+    /* HEADER */
+    header {
+      background-color: #f9d0dc;
+      text-align: center;
+      padding: 50px 20px 30px;
+    }
+    header h1 {
+      font-size: 38px;
+      color: #8a2a40;
+      margin-bottom: 8px;
+    }
+    header p {
+      font-size: 15px;
+      color: #a04060;
+      font-style: italic;
     }
 
-    p {
+    /* INTRO */
+    .intro {
+      max-width: 680px;
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 17px;
+      line-height: 1.9;
+      color: #5a3a3a;
+    }
+
+    /* SECTION */
+    .section {
+      max-width: 750px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .section h2 {
+      font-size: 22px;
+      color: #8a2a40;
+      border-bottom: 1px solid #f9d0dc;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    /* PHOTOS */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .photo-grid img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .caption {
+      text-align: center;
+      font-size: 13px;
+      color: #9a6070;
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    /* AUDIO */
+    .audio-box {
+      background-color: #fde8ee;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    .audio-box p {
+      font-size: 15px;
       color: #7a3a4a;
-      font-size: 18px;
-      margin: 20px auto;
-      max-width: 600px;
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+    audio {
+      width: 100%;
+    }
+
+    /* P5 CANVAS */
+    #sketch-container {
+      display: flex;
+      justify-content: center;
+    }
+    canvas {
+      border-radius: 12px;
+    }
+    .sketch-caption {
+      text-align: center;
+      font-size: 13px;
+      color: #9a6070;
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: #f9d0dc;
+      text-align: center;
+      padding: 28px 20px;
+      margin-top: 50px;
+      font-size: 13px;
+      color: #7a4050;
+      line-height: 2;
+    }
+    footer h3 {
+      font-size: 15px;
+      color: #8a2a40;
+      margin-bottom: 8px;
     }
   </style>
 </head>
 <body>
 
-  <h1>Cherry Blossoms in Central Park</h1>
-  <p>By Jiayi Li</p>
-  <p>Every spring, Central Park fills with pink cherry blossoms. This is my favorite moment in New York City.</p>
+  <!-- HEADER -->
+  <header>
+    <h1>Cherry Blossoms in Central Park</h1>
+    <p>A New York Spring Story &nbsp;|&nbsp; By Jiayi Li</p>
+  </header>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-  <script>
-    function setup() {
-      createCanvas(600, 400);
-    }
+  <!-- INTRO -->
+  <div class="intro">
+    <p>Every spring, Central Park transforms into a sea of white and pink blossoms. The cherry trees bloom for just a few weeks, but those weeks feel like magic. This is my favorite moment in New York City.</p>
+  </div>
 
-    function draw() {
-      background(255, 228, 236);
+  <!-- SECTION 1: PHOTOS -->
+  <div class="section">
+    <h2>The Blossoms</h2>
+    <div class="photo-grid">
+      <img src="IMG_7996.jpeg" alt="Cherry blossoms with NYC buildings">
+      <img src="IMG_8128.jpeg" alt="Looking up at cherry blossom tree">
+      <img src="IMG_8106.jpeg" alt="Central Park lake view">
+    </div>
+    <p class="caption">Photos taken in Central Park, New York City — edited in Photoshop</p>
+  </div>
 
-      for (var i = 0; i < 5; i++) {
-        fill(255, 182, 210);
-        noStroke();
-        ellipse(random(width), random(height), 12, 8);
+  <!-- SECTION 2: AUDIO -->
+  <div class="section">
+    <h2>The Sounds</h2>
+    <div class="audio-box">
+      <p>Close your eyes and listen to the sounds of the park in spring.</p>
+      <audio controls>
+        <source src="Sequence_11.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+      </audio>
+    </div>
+    <p class="caption">Ambient audio — recorded and edited in Audacity</p>
+  </div>
+
+  <!-- SECTION 3: P5 SKETCH -->
+  <div class="section">
+    <h2>The Petals</h2>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script>
+      var petals = [];
+
+      function setup() {
+        var cnv = createCanvas(710, 300);
+        cnv.parent('sketch-container');
+        for (var i = 0; i < 80; i++) {
+          petals.push({
+            x: random(width),
+            y: random(-300, 0),
+            size: random(8, 16),
+            speed: random(0.8, 2.5),
+            drift: random(-0.4, 0.4),
+            angle: random(360),
+            spin: random(-1.5, 1.5)
+          });
+        }
       }
-    }
-  </script>
+
+      function draw() {
+        background(253, 232, 238);
+        noStroke();
+        for (var i = 0; i < petals.length; i++) {
+          var p = petals[i];
+          push();
+          translate(p.x, p.y);
+          rotate(radians(p.angle));
+          fill(255, 200, 215, 210);
+          ellipse(0, 0, p.size, p.size * 0.6);
+          fill(255, 225, 235, 160);
+          ellipse(p.size * 0.25, -p.size * 0.1, p.size * 0.5, p.size * 0.35);
+          pop();
+          p.y += p.speed;
+          p.x += p.drift;
+          p.angle += p.spin;
+          if (p.y > height) {
+            p.y = random(-100, 0);
+            p.x = random(width);
+          }
+        }
+      }
+    </script>
+    <div id="sketch-container"></div>
+    <p class="sketch-caption">Falling cherry blossom petals — interactive animation made with p5.js</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <h3>Credits</h3>
+    <p>Created by Jiayi Li &nbsp;|&nbsp; MMP 100 Final Project &nbsp;|&nbsp; BMCC</p>
+    <p>Tools used: Adobe Photoshop &nbsp;|&nbsp; Audacity &nbsp;|&nbsp; p5.js</p>
+    <p>All photos taken by Jiayi Li, Central Park, New York City</p>
+    <p>Audio recorded and edited by Jiayi Li</p>
+  </footer>
 
 </body>
 </html>
